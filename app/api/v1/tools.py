@@ -39,7 +39,11 @@ async def run_tool_with_file(slug: str, file: UploadFile = File(...)) -> FileRes
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-    input_path = await save_upload(file, settings.upload_dir)
+    try:
+        input_path = await save_upload(file, settings.upload_dir)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
     job_output_dir = settings.output_dir / Path(input_path).stem
 
     try:
