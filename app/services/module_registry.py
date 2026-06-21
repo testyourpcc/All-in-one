@@ -1,9 +1,11 @@
 from app.modules.base import ToolModule
 from app.modules.excel_batch_edit import ExcelBatchEditModule
+from app.modules.pdf_to_word import PdfToWordModule
 from app.modules.pdf_compress import PdfCompressModule
 from app.modules.pdf_merge import PdfMergeModule
 from app.modules.pdf_split import PdfSplitModule
 from app.modules.word_batch_edit import WordBatchEditModule
+from app.modules.word_to_pdf import WordToPdfModule
 from app.schemas.tool import ToolMetadata
 
 
@@ -25,6 +27,8 @@ class ModuleRegistry:
 
 def create_default_registry() -> ModuleRegistry:
     registry = ModuleRegistry()
+    registry.register(WordToPdfModule())
+    registry.register(PdfToWordModule())
     registry.register(PdfMergeModule())
     registry.register(PdfSplitModule())
     registry.register(PdfCompressModule())

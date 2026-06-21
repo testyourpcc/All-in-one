@@ -55,6 +55,24 @@ def home() -> str:
     }
 
     def render_tool_card(tool: Any, accent: str) -> str:
+        if tool.accepts_files:
+            accept = ",".join(tool.input_extensions)
+            form = f"""
+            <form method="post" action="{settings.api_prefix}/tools/{escape(tool.slug)}/run" enctype="multipart/form-data">
+                <label>
+                    <span>Choose file</span>
+                    <input type="file" name="file" accept="{escape(accept)}" required>
+                </label>
+                <button type="submit">Convert and download</button>
+            </form>
+            """
+        else:
+            form = f"""
+            <form method="post" action="{settings.api_prefix}/jobs/{escape(tool.slug)}">
+                <button type="submit">Run preview</button>
+            </form>
+            """
+
         return f"""
         <article class="tool-card" style="--accent: {accent}">
             <div>
@@ -65,9 +83,7 @@ def home() -> str:
                 <h3>{escape(tool.name)}</h3>
                 <p>{escape(tool.description)}</p>
             </div>
-            <form method="post" action="{settings.api_prefix}/jobs/{escape(tool.slug)}">
-                <button type="submit">Run preview</button>
-            </form>
+            {form}
         </article>
         """
 
@@ -307,7 +323,27 @@ def home() -> str:
                 line-height: 1.5;
             }}
             .tool-card form {{
+                display: grid;
+                gap: 10px;
                 margin-top: 18px;
+            }}
+            .tool-card label {{
+                display: grid;
+                gap: 7px;
+                color: #66758a;
+                font-size: 12px;
+                font-weight: 700;
+            }}
+            .tool-card input[type="file"] {{
+                width: 100%;
+                min-height: 40px;
+                border: 1px dashed color-mix(in srgb, var(--accent), white 55%);
+                border-radius: 8px;
+                background: #ffffff;
+                color: #526071;
+                padding: 8px;
+                font: inherit;
+                font-size: 13px;
             }}
             .tool-card button {{
                 width: 100%;

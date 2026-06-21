@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class ToolMetadata(BaseModel):
@@ -6,6 +6,9 @@ class ToolMetadata(BaseModel):
     name: str
     description: str
     category: str
+    accepts_files: bool = False
+    input_extensions: list[str] = Field(default_factory=list)
+    output_extension: str | None = None
 
 
 class ToolListResponse(BaseModel):

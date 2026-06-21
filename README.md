@@ -51,6 +51,15 @@ Nếu chưa có secrets, workflow vẫn chạy test/build image; bước Azure d
 Azure Web App nên được tạo ở chế độ Linux container, port app là `8000`.
 Trong Azure App Service, thêm app setting `WEBSITES_PORT=8000` nếu container không tự nhận đúng port.
 
+## Tool đã có
+
+- Word to PDF: upload `.doc` hoặc `.docx`, trả về `.pdf`.
+- PDF to Word: upload `.pdf`, trả về `.docx`.
+- PDF merge/split/compress: đã có module placeholder để triển khai tiếp.
+- Word/Excel batch edit: đã có module placeholder để triển khai tiếp.
+
+`Word to PDF` chạy bằng LibreOffice headless trong Docker image. `PDF to Word` dùng thư viện `pdf2docx`, phù hợp cho tài liệu phổ thông nhưng chất lượng layout vẫn phụ thuộc cấu trúc file PDF đầu vào.
+
 ## Thêm tool mới
 
 1. Tạo file module mới trong `app/modules`.
