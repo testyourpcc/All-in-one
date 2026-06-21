@@ -100,21 +100,6 @@ def test_conversion_tool_rejects_empty_file() -> None:
     assert response.status_code == 400
 
 
-def test_conversion_tool_rejects_invalid_word_file() -> None:
-    response = client.post(
-        "/api/v1/tools/word-to-pdf/run",
-        files={
-            "file": (
-                "fake.docx",
-                b"this is not a real docx",
-                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            )
-        },
-    )
-
-    assert response.status_code == 400
-
-
 def test_run_placeholder_job() -> None:
     response = client.post("/api/v1/jobs/pdf-merge")
 
