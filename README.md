@@ -31,6 +31,26 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+## CI/CD GitHub Actions + Azure
+
+Workflow nằm ở `.github/workflows/ci-cd.yml`.
+
+Luồng chạy:
+
+1. Pull request hoặc push: cài dependency và chạy `pytest`.
+2. Push vào `main`: build Docker image và push lên GitHub Container Registry.
+3. Push vào `main`: deploy image lên Azure Web App for Containers nếu đã cấu hình secrets.
+
+Repository secrets cần tạo trong GitHub:
+
+- `AZURE_WEBAPP_NAME`: tên Azure Web App.
+- `AZURE_WEBAPP_PUBLISH_PROFILE`: nội dung file publish profile tải từ Azure Portal.
+
+Nếu chưa có secrets, workflow vẫn chạy test/build image; bước Azure deploy sẽ được skip bằng notice.
+
+Azure Web App nên được tạo ở chế độ Linux container, port app là `8000`.
+Trong Azure App Service, thêm app setting `WEBSITES_PORT=8000` nếu container không tự nhận đúng port.
+
 ## Thêm tool mới
 
 1. Tạo file module mới trong `app/modules`.
