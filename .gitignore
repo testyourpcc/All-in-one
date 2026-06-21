@@ -100,3 +100,5 @@ instance/
 .webassets-cache
 .streamlit/secrets.toml
 .pypirc
+*.PublishSettings
+*.publishsettings
