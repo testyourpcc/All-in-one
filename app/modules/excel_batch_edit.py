@@ -8,6 +8,7 @@ class ExcelBatchEditModule(ToolModule):
     name = "Excel Batch Edit"
     description = "Apply batch edits to Excel files."
     category = "excel"
+    scope = "custom"
 
     def run(self, **kwargs: Any) -> dict[str, Any]:
         return {

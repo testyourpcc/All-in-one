@@ -12,6 +12,7 @@ class ToolModule(ABC):
     name: str
     description: str
     category: str = "general"
+    scope: str = "common"
     accepts_files: bool = False
     input_extensions: tuple[str, ...] = ()
     output_extension: str | None = None
@@ -23,6 +24,7 @@ class ToolModule(ABC):
             name=self.name,
             description=self.description,
             category=self.category,
+            scope=self.scope,
             accepts_files=self.accepts_files,
             input_extensions=list(self.input_extensions),
             output_extension=self.output_extension,

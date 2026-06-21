@@ -8,6 +8,7 @@ class WordBatchEditModule(ToolModule):
     name = "Word Batch Edit"
     description = "Apply batch edits to Word documents."
     category = "word"
+    scope = "custom"
 
     def run(self, **kwargs: Any) -> dict[str, Any]:
         return {

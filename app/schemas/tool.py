@@ -6,6 +6,7 @@ class ToolMetadata(BaseModel):
     name: str
     description: str
     category: str
+    scope: str = "common"
     accepts_files: bool = False
     input_extensions: list[str] = Field(default_factory=list)
     output_extension: str | None = None
