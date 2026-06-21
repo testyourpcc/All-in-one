@@ -11,6 +11,8 @@ def test_home_page() -> None:
 
     assert response.status_code == 200
     assert "File Tool Local" in response.text
+    assert "Word tools" in response.text
+    assert "Excel tools" in response.text
     assert "pdf-merge" in response.text
 
 
